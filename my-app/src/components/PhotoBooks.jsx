@@ -58,12 +58,15 @@ const PhotoBooks = () => {
 
   return (
     <div className="flex flex-col items-center justify-center py-16 bg-gradient-to-b from-white to-gray-50">
-      <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center">
         Explore Our Photo Book Collection
       </h2>
 
-      {/* Container for 2 cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 perspective-1000">
+      {/* Container for photo cards */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-4 sm:px-8 md:px-12 lg:px-20 w-full max-w-6xl"
+        style={{ perspective: "1000px" }}
+      >
         {visibleItems.map((item, index) => (
           <div
             key={index}
@@ -75,22 +78,22 @@ const PhotoBooks = () => {
             <img
               src={item.img}
               alt={item.title}
-              className="w-full h-[250px] object-cover"
+              className="w-full h-[220px] sm:h-[250px] md:h-[300px] object-cover"
             />
-            <div className="bg-black bg-opacity-50 text-white py-3 text-center text-lg font-semibold">
+            <div className="bg-black bg-opacity-50 text-white py-3 text-center text-base sm:text-lg font-semibold">
               {item.title}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Description and Button */}
-      <div className="max-w-3xl text-center mt-12 px-4">
-        <p className="text-gray-600 text-lg mb-6">
-          Experience the beauty of every story through our dynamic 3D photo
-          book showcase — two memories at a time, rotating every few seconds.
+      {/* Description + Button */}
+      <div className="max-w-3xl text-center mt-12 px-6 sm:px-8">
+        <p className="text-gray-600 text-base sm:text-lg mb-6 leading-relaxed">
+          Experience the beauty of every story through our dynamic 3D photo book
+          showcase — two memories at a time, rotating every few seconds.
         </p>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md shadow-md transition">
+        <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-md shadow-md transition font-medium">
           Learn More
         </button>
       </div>

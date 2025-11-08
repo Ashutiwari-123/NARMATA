@@ -1,5 +1,29 @@
 import React, { useState, useRef } from "react";
 
+// ✅ Separate Card component to safely use useRef
+const Card = ({ item, onMouseMove, onMouseLeave }) => {
+  const cardRef = useRef(null);
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={(e) => onMouseMove(e, cardRef)}
+      onMouseLeave={() => onMouseLeave(cardRef)}
+      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform-gpu flex flex-col items-center w-[250px] sm:w-[280px] md:w-[300px]"
+      style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+    >
+      <img
+        src={item.img}
+        alt={item.title}
+        className="w-full h-[250px] object-cover"
+      />
+      <p className="mt-3 mb-4 text-gray-700 font-medium text-center">
+        {item.title}
+      </p>
+    </div>
+  );
+};
+
 const slides = [
   [
     {
@@ -34,6 +58,7 @@ const slides = [
 const NewLaunches = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // 🔁 Navigation
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
@@ -42,11 +67,11 @@ const NewLaunches = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Handle 3D Tilt
+  // 🎯 3D Tilt Effect
   const handleMouseMove = (e, cardRef) => {
     const card = cardRef.current;
     const { left, top, width, height } = card.getBoundingClientRect();
-    const x = ((e.clientX - left) / width - 0.5) * 20; // max tilt 10deg each side
+    const x = ((e.clientX - left) / width - 0.5) * 20;
     const y = ((e.clientY - top) / height - 0.5) * -20;
     card.style.transform = `rotateY(${x}deg) rotateX(${y}deg) scale(1.05)`;
   };
@@ -58,17 +83,19 @@ const NewLaunches = () => {
 
   return (
     <section className="w-[90%] max-w-7xl mx-auto py-12">
-      <div className="flex gap-6 items-start">
-        {/* Fixed Card */}
-        <div className="flex-shrink-0 bg-gray-100 rounded-xl p-10 flex flex-col justify-center items-start w-[300px] h-[320px] shadow-md">
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Fixed Info Card */}
+        <div className="flex-shrink-0 bg-gray-100 rounded-xl p-10 flex flex-col justify-center items-start w-full lg:w-[300px] h-[320px] shadow-md">
           <h2 className="text-3xl font-bold text-gray-800 mb-3">
             NEW LAUNCHES
           </h2>
-          <p className="text-gray-600 text-lg">Explore what's new at Printo.</p>
+          <p className="text-gray-600 text-lg">
+            Explore what's new at Printo.
+          </p>
         </div>
 
         {/* Slider Section */}
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative flex-1 overflow-hidden w-full">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -76,33 +103,16 @@ const NewLaunches = () => {
             {slides.map((group, index) => (
               <div
                 key={index}
-                className="flex flex-shrink-0 w-full gap-6 justify-center"
+                className="flex flex-wrap justify-center gap-6 flex-shrink-0 w-full"
               >
-                {group.map((item, i) => {
-                  const cardRef = useRef(null);
-                  return (
-                    <div
-                      key={i}
-                      ref={cardRef}
-                      onMouseMove={(e) => handleMouseMove(e, cardRef)}
-                      onMouseLeave={() => handleMouseLeave(cardRef)}
-                      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform-gpu flex flex-col items-center w-[250px]"
-                      style={{
-                        transformStyle: "preserve-3d",
-                        perspective: "1000px",
-                      }}
-                    >
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="w-full h-[250px] object-cover"
-                      />
-                      <p className="mt-3 mb-4 text-gray-700 font-medium text-center">
-                        {item.title}
-                      </p>
-                    </div>
-                  );
-                })}
+                {group.map((item, i) => (
+                  <Card
+                    key={i}
+                    item={item}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                  />
+                ))}
               </div>
             ))}
           </div>

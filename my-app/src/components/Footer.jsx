@@ -11,13 +11,6 @@ const Footer = () => {
       { name: "Careers", href: "#" },
       { name: "Blog", href: "#" },
     ],
-    support: [
-      { name: "Help", href: "#" },
-      { name: "Business Solutions", href: "#" },
-      { name: "Find Stores", href: "#" },
-      { name: "My Account", href: "#" },
-      { name: "Track Order", href: "#" },
-    ],
     importantLinks: [
       { name: "Privacy Policy", href: "#" },
       { name: "Delivery & Return Policy", href: "#" },
@@ -30,10 +23,10 @@ const Footer = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400" />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-14">
-        {/* About */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-12 md:py-16">
+        {/* About Section */}
         <div className="mb-10 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-3">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-3">
             Printo — Making Your Print Experience Effortless
           </h2>
           <p className="text-gray-600 text-base leading-relaxed max-w-3xl mx-auto md:mx-0">
@@ -45,8 +38,8 @@ const Footer = () => {
           {showFullDescription && (
             <p className="text-gray-600 mt-3 max-w-3xl mx-auto md:mx-0">
               Our 50,000+ sq. ft. Bangalore production hub and 28+ retail stores across
-              major cities help startups and enterprises alike with everything from T-shirts
-              to corporate kits.
+              major cities help startups and enterprises alike with everything from
+              T-shirts to corporate kits.
             </p>
           )}
           <button
@@ -57,11 +50,11 @@ const Footer = () => {
           </button>
         </div>
 
-        {/* Links */}
-        <div className="grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-10 mb-14 text-center md:text-left">
+        {/* Footer Links Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14 text-center md:text-left">
           {/* Find Stores */}
           <div>
-            <h3 className="font-semibold text-gray-800 mb-4">Find Stores</h3>
+            <h3 className="font-semibold text-gray-800 mb-4 text-lg">Find Stores</h3>
             <ul className="space-y-2">
               {footerLinks.findStores.map((store, i) => (
                 <li key={i}>
@@ -76,9 +69,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Our Company */}
           <div>
-            <h3 className="font-semibold text-gray-800 mb-4">Our Company</h3>
+            <h3 className="font-semibold text-gray-800 mb-4 text-lg">Our Company</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link, i) => (
                 <li key={i}>
@@ -93,26 +86,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support */}
-          {/* <div>
-            <h3 className="font-semibold text-gray-800 mb-4">Support</h3>
-            <ul className="space-y-2">
-              {footerLinks.support.map((link, i) => (
-                <li key={i}>
-                  <a
-                    href={link.href}
-                    className="text-gray-600 hover:text-purple-600 transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
           {/* Important Links */}
           <div>
-            <h3 className="font-semibold text-gray-800 mb-4">Important Links</h3>
+            <h3 className="font-semibold text-gray-800 mb-4 text-lg">Important Links</h3>
             <ul className="space-y-2">
               {footerLinks.importantLinks.map((link, i) => (
                 <li key={i}>
@@ -127,9 +103,10 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-4">Contact Us</h3>
+          {/* Contact Us */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-2 flex flex-col items-center md:items-start">
+            <h3 className="font-semibold text-gray-800 mb-4 text-lg">Contact Us</h3>
+
             <a
               href="tel:+919513734374"
               className="flex items-center justify-center md:justify-start gap-2 text-gray-800 hover:text-purple-600 transition-colors mb-2"
@@ -137,6 +114,7 @@ const Footer = () => {
               <Phone className="w-4 h-4" />
               <span className="text-sm">+91 951 373 4374</span>
             </a>
+
             <a
               href="mailto:care@printo.in"
               className="flex items-center justify-center md:justify-start gap-2 text-gray-800 hover:text-purple-600 transition-colors"
@@ -145,7 +123,7 @@ const Footer = () => {
               <span className="text-sm">care@printo.in</span>
             </a>
 
-            {/* Social */}
+            {/* Social Media */}
             <h4 className="font-semibold text-gray-800 mt-6 mb-3">Follow us</h4>
             <div className="flex justify-center md:justify-start gap-3">
               <a className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center hover:scale-110 shadow-md hover:shadow-lg transition-all">
@@ -162,7 +140,7 @@ const Footer = () => {
             </div>
 
             {/* App Badges */}
-            <div className="flex justify-center md:justify-start gap-2 mt-4">
+            <div className="flex justify-center md:justify-start gap-2 mt-4 flex-wrap">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Play Store"
@@ -185,7 +163,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <p className="text-center text-gray-600 text-sm">
+        <p className="text-center text-gray-600 text-sm mt-4">
           © {new Date().getFullYear()} Printo Document Services Pvt. Ltd. All Rights Reserved.
         </p>
       </div>
